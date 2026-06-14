@@ -1,9 +1,9 @@
 [versions]
 project = "2.3.0-SNAPSHOT"
 
-kotlin = "2.3.0-RC3"
+kotlin = "2.3.0"
 dokka = "2.1.0"
-buildconfig = "6.0.6"
+buildconfig = "6.0.7"
 
 ksj = "1.9.0"
 

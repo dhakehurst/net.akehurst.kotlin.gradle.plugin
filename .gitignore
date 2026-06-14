@@ -2,6 +2,7 @@
 out/
 .gradle/
 .gradle-build/
+.kotlin/
 
 # Compiled class file
 *.class
