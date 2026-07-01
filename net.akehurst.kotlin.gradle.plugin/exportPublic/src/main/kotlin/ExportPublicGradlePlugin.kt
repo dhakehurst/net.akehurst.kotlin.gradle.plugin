@@ -95,6 +95,8 @@ class ExportPublicComponentRegistrar(
     private val defaultExportPatterns: List<String>
 ) : CompilerPluginRegistrar() {
 
+    override val pluginId: String = KotlinPluginInfo.KOTLIN_PLUGIN_ID
+
     @Suppress("unused") // Used by service loader
     constructor() : this(
         defaultExportPatterns = emptyList()
