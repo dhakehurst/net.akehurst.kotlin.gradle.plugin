@@ -1,3 +1,5 @@
+@file:OptIn(org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI::class)
+
 package net.akehurst.kotlin.gradle.plugin.exportPublic
 
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
@@ -16,9 +18,9 @@ import org.jetbrains.kotlin.ir.builders.irCallConstructor
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.types.*
-import org.jetbrains.kotlin.ir.types.isNullable
-import org.jetbrains.kotlin.ir.types.getArrayElementType
 import org.jetbrains.kotlin.ir.util.*
+import org.jetbrains.kotlin.ir.util.getArrayElementType
+import org.jetbrains.kotlin.ir.util.isNullable
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
@@ -59,7 +61,7 @@ class ExportPublicIrGenerationExtension(
         )
 
         val jsExportSymbol =
-            pluginContext.referenceConstructors(ClassId(FqName("kotlin.js"), Name.identifier("JsExport"))).first()
+            pluginContext.finderForBuiltins().findConstructors(ClassId(FqName("kotlin.js"), Name.identifier("JsExport"))).first()
         //messageCollector.report(CompilerMessageSeverity.INFO, "JsExport class: ${jsExportSymbol.signature}")
 
         val exportVisitor = object : IrElementTransformerVoid() {
@@ -549,7 +551,6 @@ class ExportPublicIrGenerationExtension(
                     when (it) {
                         is IrStarProjection -> true
                         is IrTypeProjection -> it.type.hasStarProjections
-                        else -> error("Unsupported subtype of IrTypeArgument")
                     }
                 }
             }
