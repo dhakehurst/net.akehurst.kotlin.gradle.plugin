@@ -102,8 +102,6 @@ class ExportPublicComponentRegistrar(
         defaultExportPatterns = emptyList()
     )
 
-    override val pluginId: String = KotlinPluginInfo.KOTLIN_PLUGIN_ID
-
     override val supportsK2: Boolean get() = true
 
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {

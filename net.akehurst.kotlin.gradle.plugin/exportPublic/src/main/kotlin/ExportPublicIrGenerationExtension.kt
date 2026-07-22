@@ -209,10 +209,6 @@ class ExportPublicIrGenerationExtension(
                             { "$msg it is an 'inline' function" }) -> super.visitFunction(declaration)
 
                         checkIfStrong(
-                            { declaration.isSuspend },
-                            { "$msg it is a 'suspend' function" }) -> super.visitFunction(declaration)
-
-                        checkIfStrong(
                             { declaration.returnType.isExportable.not() },
                             { "$msg it has a non-exportable return type" }) -> super.visitFunction(declaration)
 
