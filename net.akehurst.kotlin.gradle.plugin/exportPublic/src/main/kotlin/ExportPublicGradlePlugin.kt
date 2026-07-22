@@ -4,13 +4,10 @@ import com.google.auto.service.AutoService
 import org.gradle.api.Project
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Provider
-import org.gradle.platform.base.Platform
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys
-import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
-import org.jetbrains.kotlin.cli.common.messages.MessageCollector
-import org.jetbrains.kotlin.com.intellij.mock.MockProject
 import org.jetbrains.kotlin.compiler.plugin.*
+import org.jetbrains.kotlin.config.CommonConfigurationKeys
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.config.CompilerConfigurationKey
 import org.jetbrains.kotlin.gradle.plugin.*
@@ -26,11 +23,12 @@ class ExportPublicGradlePlugin : KotlinCompilerPluginSupportPlugin {
         version = KotlinPluginInfo.PROJECT_VERSION
     )
 
-    override fun getPluginArtifactForNative(): SubpluginArtifact = SubpluginArtifact(
-        groupId = KotlinPluginInfo.PROJECT_GROUP,
-        artifactId = KotlinPluginInfo.PROJECT_NAME+"-native",
-        version = KotlinPluginInfo.PROJECT_VERSION
-    )
+//    @Suppress("OVERRIDE_DEPRECATION")
+//    override fun getPluginArtifactForNative(): SubpluginArtifact = SubpluginArtifact(
+//        groupId = KotlinPluginInfo.PROJECT_GROUP,
+//        artifactId = KotlinPluginInfo.PROJECT_NAME+"-native",
+//        version = KotlinPluginInfo.PROJECT_VERSION
+//    )
 
     override fun isApplicable(kotlinCompilation: KotlinCompilation<*>): Boolean =
         kotlinCompilation.name == KotlinCompilation.MAIN_COMPILATION_NAME &&
@@ -107,7 +105,7 @@ class ExportPublicComponentRegistrar(
     override val supportsK2: Boolean get() = true
 
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
-        val messageCollector = configuration[CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY]!!//, MessageCollector.NONE)
+        val messageCollector = configuration[CommonConfigurationKeys.MESSAGE_COLLECTOR_KEY]!!//, MessageCollector.NONE)
         val exportPatterns = configuration.get(ExportPublicCommandLineProcessor.ARG_exportPatterns, defaultExportPatterns).filter { it.isNotBlank() }
 
         IrGenerationExtension.registerExtension(ExportPublicIrGenerationExtension(messageCollector,exportPatterns))
