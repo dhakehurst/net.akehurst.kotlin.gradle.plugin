@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/dhakehurst/net.akehurst.kotlin.export-public.svg?branch=master)](https://travis-ci.com/dhakehurst/net.akehurst.kotlin.export-public)
 [![Gradle Plugin Portal](https://img.shields.io/maven-metadata/v/https/plugins.gradle.org/m2/net/akehurst/kotlin/gradle/plugin/exportPublic/maven-metadata.xml.svg?colorB=007ec6&label=gradle%20plugin)](https://plugins.gradle.org/plugin/net.akehurst.kotlin.gradle.plugin.exportPublic)
-![Kotlin](https://img.shields.io/badge/Kotlin-2.3.21-7F52FF?style=flat-square&logo=kotlin&logoColor=white)
+![Kotlin Version](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdhakehurst%2Fnet.akehurst.kotlin.compose%2Frefs%2Fheads%2Fmain%2Fnet.akehurst.kotlin.compose%2Fgradle%2Flibs.versions.toml&search=kotlin%20%3D%20%22(%5B%5E%22%5D%2B)%22&replace=%241&label=Kotlin&color=green&link=https%3A%2F%2Fkotlinlang.org%2F)
 
 # net.akehurst.kotlin.gradle.plugin
 - exportPublic
