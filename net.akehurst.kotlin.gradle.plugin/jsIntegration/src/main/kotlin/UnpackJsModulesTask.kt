@@ -21,8 +21,9 @@ import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectories
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
+import org.gradle.work.DisableCachingByDefault
 import org.slf4j.LoggerFactory
-
+@DisableCachingByDefault(because = "Unpacks third-party JS modules into local build directories.")
 open class UnpackJsModulesTask : DefaultTask() {
 
     companion object {

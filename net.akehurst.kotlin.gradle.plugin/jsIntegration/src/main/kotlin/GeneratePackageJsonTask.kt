@@ -25,11 +25,12 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
+import org.gradle.work.DisableCachingByDefault
 
 import org.slf4j.LoggerFactory
 import java.io.File
 
-
+@DisableCachingByDefault(because = "Generates package.json directly in the working directory.")
 open class GeneratePackageJsonTask : DefaultTask() {
 
     companion object {
