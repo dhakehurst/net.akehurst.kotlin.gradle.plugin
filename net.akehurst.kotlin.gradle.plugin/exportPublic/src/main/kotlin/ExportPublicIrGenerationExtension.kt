@@ -15,9 +15,7 @@ import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.backend.js.utils.isJsExport
 import org.jetbrains.kotlin.ir.backend.js.utils.realOverrideTarget
 import org.jetbrains.kotlin.ir.builders.irAnnotation
-import org.jetbrains.kotlin.ir.builders.irCallConstructor
 import org.jetbrains.kotlin.ir.declarations.*
-import org.jetbrains.kotlin.ir.expressions.IrAnnotation
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.util.*
@@ -161,7 +159,7 @@ class ExportPublicIrGenerationExtension(
                                 pluginContext,
                                 declaration.symbol
                             ).irAnnotation(jsExportSymbol, emptyList())
-                            declaration.annotations += cc as IrAnnotation
+                            declaration.annotations += cc
                             super.visitClass(declaration)
                         }
                     }
@@ -238,7 +236,7 @@ class ExportPublicIrGenerationExtension(
                                 jsExportSymbol,
                                 emptyList()
                             )
-                            declaration.annotations +=  cc
+                            declaration.annotations += cc
                             super.visitFunction(declaration)
                         }
                     }
@@ -292,7 +290,7 @@ class ExportPublicIrGenerationExtension(
                                 pluginContext,
                                 declaration.symbol
                             ).irAnnotation(jsExportSymbol, emptyList())
-                            declaration.annotations += cc as IrAnnotation
+                            declaration.annotations += cc
                             super.visitProperty(declaration)
                         }
                     }
