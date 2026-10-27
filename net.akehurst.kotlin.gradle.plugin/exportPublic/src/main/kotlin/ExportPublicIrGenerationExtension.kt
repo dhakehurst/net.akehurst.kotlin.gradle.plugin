@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.backend.js.utils.isJsExport
 import org.jetbrains.kotlin.ir.backend.js.utils.realOverrideTarget
-import org.jetbrains.kotlin.ir.builders.irCallConstructor
+import org.jetbrains.kotlin.ir.builders.irAnnotation
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.types.*
@@ -158,7 +158,7 @@ class ExportPublicIrGenerationExtension(
                             val cc = DeclarationIrBuilder(
                                 pluginContext,
                                 declaration.symbol
-                            ).irCallConstructor(jsExportSymbol, emptyList())
+                            ).irAnnotation(jsExportSymbol, emptyList())
                             declaration.annotations += cc
                             super.visitClass(declaration)
                         }
@@ -232,18 +232,18 @@ class ExportPublicIrGenerationExtension(
                                 CompilerMessageSeverity.INFO,
                                 "Exporting: ${declaration.signatureString}"
                             )
-                            val cc = DeclarationIrBuilder(pluginContext, declaration.symbol).irCallConstructor(
+                            val cc = DeclarationIrBuilder(pluginContext, declaration.symbol).irAnnotation(
                                 jsExportSymbol,
                                 emptyList()
                             )
-                            declaration.annotations = declaration.annotations + cc
+                            declaration.annotations += cc
                             super.visitFunction(declaration)
                         }
                     }
                 } catch (t: Throwable) {
                     messageCollector.report(
                         CompilerMessageSeverity.ERROR,
-                        "Error exporting function : ${declaration.kotlinFqName}"
+                        "Error exporting function : ${declaration.kotlinFqName} - ${t.message}"
                     )
                     super.visitFunction(declaration)
                 }
@@ -289,8 +289,8 @@ class ExportPublicIrGenerationExtension(
                             val cc = DeclarationIrBuilder(
                                 pluginContext,
                                 declaration.symbol
-                            ).irCallConstructor(jsExportSymbol, emptyList())
-                            declaration.annotations = declaration.annotations + cc
+                            ).irAnnotation(jsExportSymbol, emptyList())
+                            declaration.annotations += cc
                             super.visitProperty(declaration)
                         }
                     }
